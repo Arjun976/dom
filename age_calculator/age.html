@@ -36,6 +36,7 @@
       </form>
       <div id="nameResult" class="mt-4 text-center text-lg"></div>
       <div id="result" class="mt-6 text-center text-lg"></div>
+      <div id="result1" class="mt-6 text-center text-lg"></div>
     </div>
   </div>
 </div>
@@ -61,6 +62,7 @@
             }
             if(age>=0){
             document.getElementById('result').textContent = `Your age is: ${age} years`;
+            result1.innerHTML = `<p>Your age is: ${age} years</p>`;
             } else {
                 document.getElementById('result').textContent = 'Please enter a valid birth date.';
             }

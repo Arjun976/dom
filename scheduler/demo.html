@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style>
+      body {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        background-color: rgb(103, 55, 15);
+      }
+      #input{
+        background-color: rgb(255, 255, 255);
+        color: black;
+      }
+    </style>
+</head>
+<body>
+    <div class="flex h-screen">
+  <!-- Left Side: Image -->
+  <div class="w-1/2">
+    <img src="./image/img.png.png" alt="Sample Image" class="h-full w-full object-cover" />
+  </div>
+
+  <!-- Right Side: Content -->
+  <div class="w-1/2 flex items-center justify-center bg-brown-400 p-10">
+    <div class="max-w-md text-center">
+      <h1 class="text-4xl font-bold mb-4">My to do List</h1>
+      <input id="input" type="text" id="search" placeholder="Enter your task" class="border border-gray-300 p-2 rounded w-full mb-4">
+      <button type="button" onclick="addtask()" class="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700 transition">
+        
+        Add Task
+      </button>
+        <ul id="taskList" class="mt-6 space-y-2">
+        </ul>
+    </div>
+  </div>
+</div>
+
+<script>
+    function addtask() {
+    const input = document.getElementById("input");
+    const task = input.value;
+    console.log(task);
+
+    if (task === "") {
+        alert("Please enter a task");
+        return;
+    }
+
+    // Create list item
+    const li = document.createElement("li");
+    li.className = "flex items-center bg-yellow-400 p-2 rounded shadow";
+
+    // Create span for task text
+    const span = document.createElement("span");
+    span.textContent = task;
+    span.className = "flex-1 text-blue-800"; // Add some styling to the task text
+
+    // Create button
+    const btn = document.createElement("button");
+    btn.textContent = "✏️";
+    btn.className = "text-red-500 hover:text-red-700 px-3 py-1 rounded";
+    btn.onclick = () => {   
+        const newTask = prompt("Edit your task:", task);
+        if (newTask !== null && newTask.trim() !== "") {
+            span.textContent = newTask;
+        }
+        else {
+            alert("Task cannot be empty");
+        }
+
+    }; // Add functionality to edit task
+    const btn1 = document.createElement("button");
+    btn1.textContent = "❌";// Change button text to delete icon
+    btn1.className = "text-red-500 hover:text-red-700 px-3 py-1 rounded";
+    btn1.addEventListener("click", function() {
+        li.remove(); // Remove task when button is clicked 
+    }); 
+
+    const bullet=document.createElement("span");
+    bullet.textContent = "📋"; // Add bullet point
+    bullet.className = "px-2"; // Add some margin to the left of the bullet
+    // Append span and button to li
+    li.appendChild(bullet);
+    li.appendChild(span);
+    li.appendChild(btn);
+    li.appendChild(btn1);
+
+    // Append li to task list
+    document.getElementById("taskList").appendChild(li);
+
+    // Clear input
+    input.value = "";
+}
+</script>
+</body>
+</html>
