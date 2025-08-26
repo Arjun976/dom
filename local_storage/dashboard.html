@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-red-500 via-yellow-500 to-sky-500 min-h-screen">
+
+  <!-- Navbar -->
+  <nav class="bg-black shadow-md w-full fixed top-0 left-0 z-10">
+    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+      <h1 class="text-xl font-bold text-gray-200">Dashboard</h1>
+      <button onclick="logout()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
+        Logout
+      </button>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="pt-24 flex justify-center items-start">
+    <div class="mr-4 mt-8 ">
+    <img src="./image/Lovepik_com-450098706-A web dashboard admin panel flat illustration.png" alt="">
+    </div>
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md mr-4">
+      <h2 id="name" class="text-2xl font-bold text-center text-sky-800 mb-4">Welcome to the Dashboard</h2>
+
+      <div class="mt-6">
+        <h2 class="text-2xl font-semibold mb-2 text-center text-gray-800">Add Employee</h2>
+        <form class="space-y-2">
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Employee Id</label>
+            <input type="text" title="Employee Id" placeholder="Enter Employee Id" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Employee Name</label>
+            <input type="text" title="Employee Name" placeholder="Enter Employee Name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Employee Address</label>
+            <input type="text" title="Employee Address" placeholder="Enter Employee Address" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Employee Designation</label>
+            <input type="text" title="Employee Designation" placeholder="Enter Employee Designation" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Employee Experience</label>
+            <input type="number" title="Employee Experience" placeholder="Enter Employee Experience" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <div>
+            <label class="block text-sm font-medium text-gray-700">Employee Salary</label>
+            <input type="number" title="Employee Salary" placeholder="Enter Employee Salary" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+          </div>
+          <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+            Add Employee
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+      <h2 class="text-2xl font-semibold mb-2 text-center text-gray-800">Search Employee</h2>
+      <form class="space-y-2">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Search Id</label>
+          <input type="text" placeholder="Enter Search Id" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+        </div>
+        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+          Search
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function logout() {
+      localStorage.clear();
+      window.location.href = 'login.html';
+    }
+
+    let user = JSON.parse(localStorage.getItem("userdetail"));
+    document.getElementById("name").innerHTML = `${user.firstname} ${user.lastname} Welcome to Dashboard`;
+  </script>
+
+</body>
+</html>

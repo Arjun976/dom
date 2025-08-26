@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-red-500 via-yellow-500 to-sky-500 min-h-screen flex items-center justify-center">
+   
+    <div class="flex justify-end absolute top-4 right-4 w-32 bg-yellow-600 p-2 rounded-lg shadow-2xl">
+        <button onclick="logout()" class="w-full bg-red-600 text-white py-2 rounded-lg hover:bg-red-700 transition duration-300">
+            Logout
+        </button>
+    </div>
+    <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+        <h2 id="name" class="text-2xl font-bold text-center text-gray-800 mb-6">Welcome to the Dashboard</h2>
+        <p class="text-gray-600 mb-4">You have successfully logged in.</p>
+        
+    </div>
+    <script>
+        function logout() {
+            // Clear local storage and redirect to login page
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+        let user = JSON.parse(localStorage.getItem("user"));
+     document.getElementById("name").innerHTML = `Welcome ${user.first} ${user.last} to the Dashboard`;
+    </script>
+    
+</body>
+</html>
