@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Login Page</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-purple-600 via-pink-500 to-red-500 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Login</h2>
+    <form class="space-y-5">
+      
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <input type="email" id="user" placeholder="you@example.com" class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400" required />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Password</label>
+        <input type="password" id="pass"  placeholder="Enter your password" class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-400" required />
+      </div>
+      <button type="button" onclick="submit1()" class="w-full bg-purple-600 text-white py-2 rounded-lg hover:bg-purple-700 transition duration-300">
+        Login
+      </button>
+    </form>
+    <p class="mt-4 text-sm text-center text-gray-600">
+      Don't have an account?
+      <a href="#" class="text-purple-500 hover:underline">Register</a>
+    </p>
+  </div>
+</body>
+<script>
+  function submit1(){
+
+    if(user.value === "" || pass.value === ""){
+        alert("Please fill all the details");
+        return;
+    }
+    let password=pass.value;
+    let email=user.value;
+    console.log(password,email);
+    let userdetail=JSON.parse(localStorage.getItem("userdetail")) || [];
+    console.log(userdetail);
+    if(password === userdetail.password && email === userdetail.email){
+        alert("Login successful");
+        window.location.href = "local.html";
+    }
+    else{
+        alert("Invalid credentials");
+    }
+  }
+    
+</script>
+</html>
