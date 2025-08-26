@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration Form</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-red-500 via-yellow-500 to-sky-500 min-h-screen flex items-center justify-center">
+  <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
+    <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">Create Account</h2>
+    <form class="space-y-4">
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700">First Name</label>
+          <input id="block" type="text" placeholder="Arjun" class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700">Last Name</label>
+          <input id="block1" type="text" placeholder="Dev" class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+        </div>
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Email</label>
+        <input id="block2" type="email" placeholder="arjun@example.com" class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" required />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Password</label>
+        <input id="block3" type="password" placeholder="••••••••" class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+      </div>
+      <div>
+        <label class="block text-sm font-medium text-gray-700">Confirm Password</label>
+        <input id="block4" type="password" placeholder="••••••••" class="mt-1 w-full px-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-400" />
+      </div>
+      <button type="button" onclick="submitevent()" class="w-full bg-indigo-600 text-white py-2 rounded-lg hover:bg-indigo-700 transition duration-300">
+        Register
+      </button>
+    </form>
+    <p class="mt-4 text-sm text-center text-gray-600">
+      Already have an account?
+      <a href="#" class="text-indigo-500 hover:underline">Login</a>
+    </p>
+  </div>
+  
+</body>
+<script>
+function submitevent(){
+ // Prevent form submission
+
+    // Get values from input fields
+    let first = document.getElementById("block").value;
+    let last = document.getElementById("block1").value;
+    let email = document.getElementById("block2").value;
+    let pass = document.getElementById("block3").value;
+    let cpass = document.getElementById("block4").value;
+
+    // Basic validation
+    if(first === "" || last === "" || email === "" || pass === "" || cpass === ""){
+        alert("Please fill all the details");
+        return;
+    }
+
+    if(pass !== cpass){
+        alert("Password and Confirm Password should be same");
+        return;
+    }
+
+    // Save to localStorage
+    let userdetail = {
+        firstname: first,
+        lastname: last,
+        email: email,
+        password: pass
+    };
+
+    localStorage.setItem("userdetail", JSON.stringify(userdetail));
+    console.log("User registered:", userdetail);
+
+    alert("Registration successful!");
+    window.location.href = "local.html"; // Redirect to another page
+}
+</script>
+</html>
