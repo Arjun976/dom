@@ -10,9 +10,9 @@
 
   <!-- Navbar -->
   <nav class="bg-black shadow-md w-full fixed top-0 left-0 z-10">
-    <div class="max-w-7xl mx-auto px-4 py-3 flex justify-between items-center">
+    <div class="max-w-7xl mx-auto px-1 py-3 flex justify-between items-center">
       <h1 class="text-xl font-bold text-gray-200">Dashboard</h1>
-      <button onclick="logout()" class="bg-red-600 text-white px-4 py-2 rounded-lg hover:bg-red-700 transition duration-300">
+      <button onclick="logout()" class="bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition duration-300">
         Logout
       </button>
     </div>
@@ -31,29 +31,29 @@
         <form class="space-y-2">
           <div>
             <label class="block text-sm font-medium text-gray-700">Employee Id</label>
-            <input type="text" title="Employee Id" placeholder="Enter Employee Id" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            <input type="text" id="a" title="Employee Id" placeholder="Enter Employee Id" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Employee Name</label>
-            <input type="text" title="Employee Name" placeholder="Enter Employee Name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            <input type="text" id="b" title="Employee Name" placeholder="Enter Employee Name" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Employee Address</label>
-            <input type="text" title="Employee Address" placeholder="Enter Employee Address" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            <input type="text" id="c" title="Employee Address" placeholder="Enter Employee Address" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Employee Designation</label>
-            <input type="text" title="Employee Designation" placeholder="Enter Employee Designation" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            <input type="text" id="d" title="Employee Designation" placeholder="Enter Employee Designation" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Employee Experience</label>
-            <input type="number" title="Employee Experience" placeholder="Enter Employee Experience" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            <input type="number" id="e" title="Employee Experience" placeholder="Enter Employee Experience" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
           </div>
           <div>
             <label class="block text-sm font-medium text-gray-700">Employee Salary</label>
-            <input type="number" title="Employee Salary" placeholder="Enter Employee Salary" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+            <input type="number" id="f" title="Employee Salary" placeholder="Enter Employee Salary" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
           </div>
-          <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+          <button type="button" onclick="addemp()" class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
             Add Employee
           </button>
         </form>
@@ -61,15 +61,22 @@
     </div>
 
     <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md">
-      <h2 class="text-2xl font-semibold mb-2 text-center text-gray-800">Search Employee</h2>
+      <h2 class="text-2xl font-semibold mb-2 text-center text-sky-800">Search Employee</h2>
       <form class="space-y-2">
         <div>
           <label class="block text-sm font-medium text-gray-700">Search Id</label>
-          <input type="text" placeholder="Enter Search Id" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
+          <input type="text" id="searchid" placeholder="Enter Search Id" class="mt-1 block w-full px-4 py-2 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500" />
         </div>
-        <button type="submit" class="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
+        <button type="button" onclick="search()" class="w-full bg-sky-600 text-white py-2 rounded-md hover:bg-blue-700 transition duration-200">
           Search
         </button>
+        <div>
+          <p class="mt-4 text-sm text-center text-gray-600">Note: Only one employee can be searched at a time.</p>
+        </div>
+        <div id="result" class="mt-4 text-center text-gray-800">
+          <!-- Search results will be displayed here -->
+
+        </div>
       </form>
     </div>
   </div>
@@ -85,4 +92,61 @@
   </script>
 
 </body>
+<script>
+  function addemp(){
+    event.preventDefault();
+    let a=document.getElementById("a").value;
+    let b=document.getElementById("b").value;
+    let c=document.getElementById("c").value;
+    let d=document.getElementById("d").value;
+    let e=document.getElementById("e").value;
+    let f=document.getElementById("f").value;
+
+    if(a === "" || b === "" || c === "" || d === "" || e === "" || f === ""){
+        alert("Please fill all the details");
+        return;
+    }
+
+    
+    let empdetail={
+        id:a,
+        name:b,
+        address:c,
+        designation:d,
+        experience:e,
+        salary:f
+    }
+    localStorage.setItem("empdetail",JSON.stringify(empdetail));
+    alert("Employee added successfully");
+
+    // Clear input fields after adding employee
+    document.getElementById("a").value = "";
+    document.getElementById("b").value = "";
+    document.getElementById("c").value = "";
+    document.getElementById("d").value = "";
+    document.getElementById("e").value = "";
+    document.getElementById("f").value = "";
+  }
+  function search(){
+    let searchid=document.getElementById("searchid").value;
+    let empdetail=JSON.parse(localStorage.getItem("empdetail")) || [];
+    if(searchid === ""){
+        alert("Please enter search id");
+        return;
+    }
+    else if(searchid === empdetail.id){
+        document.getElementById("result").innerHTML = `
+          <p><strong>Id:</strong> ${empdetail.id}</p>
+          <p><strong>Name:</strong> ${empdetail.name}</p>
+          <p><strong>Address:</strong> ${empdetail.address}</p>
+          <p><strong>Designation:</strong> ${empdetail.designation}</p>
+          <p><strong>Experience:</strong> ${empdetail.experience}</p>
+          <p><strong>Salary:</strong> ${empdetail.salary}</p>
+        `;
+    }
+    else{
+        alert("Employee not found");
+    }
+  }
+</script>
 </html>
