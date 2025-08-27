@@ -19,9 +19,9 @@
   </nav>
 
   <!-- Main Content -->
-  <div class="pt-24 flex justify-center items-start">
-    <div class="mr-4 mt-8 ">
-    <img src="./image/Lovepik_com-450098706-A web dashboard admin panel flat illustration.png" alt="">
+  <div class="pt-24 flex flex-col md:flex-row justify-center items-center gap-4">
+    <div class="mr-4 mt-8">
+    <img src="./image/Lovepik_com-450098706-A web dashboard admin panel flat illustration.png" alt="" class="mx-auto">
     </div>
     <div class="bg-white p-8 rounded-xl shadow-2xl w-full max-w-md mr-4">
       <h2 id="name" class="text-2xl font-bold text-center text-sky-800 mb-4">Welcome to the Dashboard</h2>
@@ -75,7 +75,6 @@
         </div>
         <div id="result" class="mt-4 text-center text-gray-800">
           <!-- Search results will be displayed here -->
-
         </div>
       </form>
     </div>
@@ -90,62 +89,62 @@
     document.getElementById("name").innerHTML = `${user.firstname} ${user.lastname} Welcome to Dashboard`;
   </script>
 
+  <script>
+    function addemp(){
+      event.preventDefault();
+      let a=document.getElementById("a").value;
+      let b=document.getElementById("b").value;
+      let c=document.getElementById("c").value;
+      let d=document.getElementById("d").value;
+      let e=document.getElementById("e").value;
+      let f=document.getElementById("f").value;
+
+      if(a === "" || b === "" || c === "" || d === "" || e === "" || f === ""){
+          alert("Please fill all the details");
+          return;
+      }
+
+      
+      let empdetail={
+          id:a,
+          name:b,
+          address:c,
+          designation:d,
+          experience:e,
+          salary:f
+      }
+      localStorage.setItem("empdetail",JSON.stringify(empdetail));
+      alert("Employee added successfully");
+
+      // Clear input fields after adding employee
+      document.getElementById("a").value = "";
+      document.getElementById("b").value = "";
+      document.getElementById("c").value = "";
+      document.getElementById("d").value = "";
+      document.getElementById("e").value = "";
+      document.getElementById("f").value = "";
+    }
+    function search(){
+      let searchid=document.getElementById("searchid").value;
+      let empdetail=JSON.parse(localStorage.getItem("empdetail")) || [];
+      if(searchid === ""){
+          alert("Please enter search id");
+          return;
+      }
+      else if(searchid === empdetail.id){
+          document.getElementById("result").innerHTML = `
+            <p><strong>Id:</strong> ${empdetail.id}</p>
+            <p><strong>Name:</strong> ${empdetail.name}</p>
+            <p><strong>Address:</strong> ${empdetail.address}</p>
+            <p><strong>Designation:</strong> ${empdetail.designation}</p>
+            <p><strong>Experience:</strong> ${empdetail.experience}</p>
+            <p><strong>Salary:</strong> ${empdetail.salary}</p>
+          `;
+      }
+      else{
+          alert("Employee not found");
+      }
+    }
+  </script>
 </body>
-<script>
-  function addemp(){
-    event.preventDefault();
-    let a=document.getElementById("a").value;
-    let b=document.getElementById("b").value;
-    let c=document.getElementById("c").value;
-    let d=document.getElementById("d").value;
-    let e=document.getElementById("e").value;
-    let f=document.getElementById("f").value;
-
-    if(a === "" || b === "" || c === "" || d === "" || e === "" || f === ""){
-        alert("Please fill all the details");
-        return;
-    }
-
-    
-    let empdetail={
-        id:a,
-        name:b,
-        address:c,
-        designation:d,
-        experience:e,
-        salary:f
-    }
-    localStorage.setItem("empdetail",JSON.stringify(empdetail));
-    alert("Employee added successfully");
-
-    // Clear input fields after adding employee
-    document.getElementById("a").value = "";
-    document.getElementById("b").value = "";
-    document.getElementById("c").value = "";
-    document.getElementById("d").value = "";
-    document.getElementById("e").value = "";
-    document.getElementById("f").value = "";
-  }
-  function search(){
-    let searchid=document.getElementById("searchid").value;
-    let empdetail=JSON.parse(localStorage.getItem("empdetail")) || [];
-    if(searchid === ""){
-        alert("Please enter search id");
-        return;
-    }
-    else if(searchid === empdetail.id){
-        document.getElementById("result").innerHTML = `
-          <p><strong>Id:</strong> ${empdetail.id}</p>
-          <p><strong>Name:</strong> ${empdetail.name}</p>
-          <p><strong>Address:</strong> ${empdetail.address}</p>
-          <p><strong>Designation:</strong> ${empdetail.designation}</p>
-          <p><strong>Experience:</strong> ${empdetail.experience}</p>
-          <p><strong>Salary:</strong> ${empdetail.salary}</p>
-        `;
-    }
-    else{
-        alert("Employee not found");
-    }
-  }
-</script>
 </html>
