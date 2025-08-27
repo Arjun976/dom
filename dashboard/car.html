@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gradient-to-r from-red-500 via-yellow-500 to-sky-500 min-h-screen">
+   <div class="flex justify-center items-center min-h-screen p-4">
+    <div class="max-w-7xl mx-auto space-y-8 md:flex md:flex-row md:space-y-0 md:space-x-6">
+      <!-- Store Records Form -->
+      <div class="bg-white shadow-md rounded-lg p-6 flex-1">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Enter Details</h2>
+        <div class="space-y-4">
+          <input type="text" id="a" placeholder="Car Brand" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400" />
+          <input type="text" id="b" placeholder="Price" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400" />
+            <input type="text" id="c" placeholder="key" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-green-400" />
+          <button type="button" onclick="addinfo()" class="bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded-md w-full">Store Records</button>
+        </div>
+      </div>
+
+      <!-- Retrieve Records Form -->
+      <div class="bg-white shadow-md rounded-lg p-6 flex-1">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Enter Key to Retrieve Item</h2>
+        <div class="space-y-4">
+          <input type="text" id="d" placeholder="Key" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400" />
+          <button type="button" onclick="ret()" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded-md w-full">Retrieve Records</button>
+            <div id="res" class="mt-4 text-center text-gray-800">
+                <!-- Retrieved record will be displayed here -->
+            </div>
+        </div>
+      </div>
+
+      <!-- Remove Records Form -->
+      <div class="bg-white shadow-md rounded-lg p-6 flex-1">
+        <h2 class="text-xl font-semibold mb-4 text-gray-800">Enter Key to Delete Item</h2>
+        <div class="space-y-4">
+          <input type="text" placeholder="Key" id="rem" class="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-red-400" />
+          <button onclick="remove()" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded-md w-full">Remove Records</button>
+        </div>
+      </div>
+    </div>
+   </div>
+
+   <!-- Clear All Button -->
+   <div class="text-center pb-6">
+     <button onclick="clear()" class="bg-gray-700 hover:bg-gray-800 text-white font-semibold py-2 px-6 rounded-md">Clear All Records</button>
+   </div>
+</body>
+<script>
+function addinfo() {
+    let carBrand = document.getElementById("a").value;
+    let price = document.getElementById("b").value;
+    let key = document.getElementById("c").value;
+
+    if (carBrand === "" || price === "" || key === "") {
+        alert("Please fill all the details");
+        return;
+    }
+    if (isNaN(price) || price <= 0) {
+        alert("Please enter a valid number for price");
+        return;
+    }
+    if (localStorage.getItem(key)) {
+        alert("Key already exists. Please use a different key.");
+        return;
+    }
+
+    
+    let obj = {
+        carBrand: carBrand,
+        price: price,
+        key: key
+    };
+    localStorage.setItem(key, JSON.stringify(obj));
+    alert("Record added successfully");
+
+ 
+    document.getElementById("a").value = "";
+    document.getElementById("b").value = "";
+    document.getElementById("c").value = "";
+}
+
+function ret() {
+    let key = document.getElementById("d").value;
+    if (key === "") {
+        alert("Please enter the key");
+        return;
+    }
+
+    let obj = JSON.parse(localStorage.getItem(key));
+    if (obj && obj.key === key) {
+        document.getElementById("res").innerHTML = `
+            <div>
+                <p class="text-lg font-semibold text-gray-800">Car Brand: ${obj.carBrand}</p>
+                <p class="text-md text-gray-700">Price: ₹${obj.price}</p>
+            </div>
+        `;
+    } else {
+        alert("No record found for the given key"); 
+    }
+}
+
+function remove() {
+    let key = document.getElementById("rem").value;
+    if (key === "") {
+        alert("Please enter the key");
+        return;
+    }
+
+    let obj = JSON.parse(localStorage.getItem(key));
+    if (obj && obj.key === key) {
+        localStorage.removeItem(key);
+        alert("Record removed successfully");
+    } else {
+        alert("No record found for the given key");
+    }
+    document.getElementById("rem").value = "";
+}
+
+function clearAll() {
+    localStorage.clear();
+    alert("All records cleared successfully");
+}
+</script>
+</html>
