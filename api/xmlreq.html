@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div class="p-6 bg-gray-100 min-h-screen">
+  <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">📝 To Do List</h1>
+
+  <div class="overflow-x-auto">
+    <table class="min-w-full bg-white rounded-lg shadow-md">
+      <thead class="bg-blue-500 text-white">
+        <tr>
+          <th class="py-3 px-6 text-left">User</th>
+          <th class="py-3 px-6 text-left">ID</th>
+          <th class="py-3 px-6 text-left">Title</th>
+          <th class="py-3 px-6 text-left">Status</th>
+        </tr>
+      </thead>
+      <tbody class="text-gray-700" id="result">
+      </tbody >
+    </table>
+  </div>
+</div>
+</body>
+<script>
+    // Create request
+    const reqobj = new XMLHttpRequest();
+    // Connect
+    reqobj.open("GET", "https://jsonplaceholder.typicode.com/todos");
+    // Get response
+    reqobj.onreadystatechange = () => {
+        if (reqobj.readyState === 4 && reqobj.status >= 200 && reqobj.status < 300) {
+            const data = JSON.parse(reqobj.responseText);
+            console.log(data);
+            diaplayarr(data);
+        } else {
+            console.log("Error");
+        }
+        
+    };
+    // Send
+    reqobj.send();
+    function diaplayarr(data){
+        for(let todo of data){
+            result.innerHTML+=`
+            <tr>
+            <td class="py-3 px-6">${todo.userId}</td>
+            <td class="py-3 px-6">${todo.id}</td>
+            <td class="py-3 px-6">${todo.title}</td>
+                <td class="py-3 px-6 text-green-600 font-semibold">${todo.completed}</td>
+            </tr>
+            `
+        }       
+
+    }
+</script>
+</html>
