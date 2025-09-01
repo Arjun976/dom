@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Boxes</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body>
+    <div id="box" class="flex flex-wrap gap-5 p-5 justify-center">
+    </div>
+    <script>
+        const reqobj = new XMLHttpRequest();
+        reqobj.open("GET", "https://dummyjson.com/users");
+
+        reqobj.onreadystatechange = () => {
+            if (reqobj.readyState === 4 && reqobj.status >= 200 && reqobj.status < 300) {
+                const data = JSON.parse(reqobj.responseText);
+                displayarr(data);
+            } else if (reqobj.readyState === 4) {
+                console.log("Error: " + reqobj.status);
+            }
+        };
+
+        reqobj.send();
+        
+        function displayarr(data) {
+            const box = document.getElementById("box");
+            for (let i = 0; i < data.users.length; i++) {
+                const div = document.createElement("div");
+                div.className = "border border-gray-300 rounded-lg p-4 w-[300px] bg-black shadow-[0_0_15px_rgba(0,255,0,0.7)]";
+                div.innerHTML = `
+                    <img src="${data.users[i].image}" alt="${data.users[i].firstName}'s profile" class="w-full h-[150px] object-cover rounded-lg mb-2">
+                    <p class="font-bold text-lg text-white">${data.users[i].firstName} ${data.users[i].lastName}</p>
+                    <p class="text-white my-1">Email: ${data.users[i].email}</p>
+                    <p class="text-white my-1">Gender: ${data.users[i].gender}</p>
+                    <p class="text-white my-1">Phone: ${data.users[i].phone}</p>
+                    <p class="text-white my-1">Address: ${data.users[i].address.address}</p>
+                    <p class="text-white my-1">City: ${data.users[i].address.city}</p>
+                    <p class="text-white my-1">State: ${data.users[i].address.state}</p>
+                `;
+                box.appendChild(div);
+            }
+        }
+    </script>
+</body>
+</html>
