@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const res=new Promise((resolve,reject)=>{
+          var passexam=true;
+          setTimeout(()=>{
+            if(passexam){
+              resolve("Dad gifter a Mobile");
+            }
+            else{
+              reject("Dad scolded him");
+            }
+        },2000);
+        });
+        res.then(result=>alert(result))
+        res.catch(error=>alert('catch err',error));
+    </script>
+</body>
+</html>

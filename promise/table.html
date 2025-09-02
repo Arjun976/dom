@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+</head>
+
+<body>
+    <h1 class="text-3xl text-center">
+        TO DO
+    </h1>
+
+
+
+    <div class="relative overflow-x-auto shadow-md sm:rounded-lg p-30 bg-gray-50 m-20">
+        <table class="text-sm text-left rtl:text-right text-gray-500 dark:text-gray-400 mx-auto">
+            <thead class="text-xs text-gray-700 uppercase dark:text-gray-400">
+                <tr>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                        UserId
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        ID
+                    </th>
+                    <th scope="col" class="px-6 py-3 bg-gray-50 dark:bg-gray-800">
+                        Title
+                    </th>
+                    <th scope="col" class="px-6 py-3">
+                        Compleated
+                    </th>
+                </tr>
+            </thead>
+            <tbody id="result">
+                
+
+
+            </tbody>
+        </table>
+    </div>
+
+    <script>
+        // 1. fetch() - Assynchronous event - response -> .then
+
+        fetch('http://jsonplaceholder.typicode.com/todos')
+
+        .then(data => data.json()) // object -> array
+        .then(todo =>displayArray(todo))
+        .catch(err =>{
+            result.innerHTML = 'Error while fetching'
+            console.log("Error while fetching...", err)
+        })
+
+        function displayArray(todoArray){
+            for(let todo of todoArray){
+                result.innerHTML += `
+                <tr class="border-b border-gray-200 dark:border-gray-700">
+                    <th scope="row"
+                        class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap bg-gray-50 dark:text-white dark:bg-gray-800">
+                        ${todo.userId}
+                    </th>
+                    <td class="px-6 py-4">
+                        ${todo.id}
+                    </td>
+                    <td class="px-6 py-4 bg-gray-50 dark:bg-gray-800">
+                        ${todo.title}
+                    </td>
+                    <td class="px-6 py-4">
+                        ${todo.completed}
+                    </td>
+                </tr>`
+            }
+        }
+    </script>
+</body>
+
+</html>
